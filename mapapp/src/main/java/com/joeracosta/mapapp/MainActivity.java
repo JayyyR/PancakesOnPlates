@@ -14,7 +14,8 @@ import com.joeracosta.mapapp.view.MapScreens.WhiteScreen;
 import com.joeracosta.mapapp.view.MapScreens.PurpleScreen;
 import com.joeracosta.mapapp.view.MapScreens.StackHostScreen;
 
-import me.mattlogan.library.ScreenMap.ViewMap;
+import me.mattlogan.library.Map.ViewMap;
+import me.mattlogan.library.Map.ViewMapHost;
 
 
 public class MainActivity extends AppCompatActivity implements ViewMapHost {

@@ -10,16 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
-import com.joeracosta.mapapp.ViewStackHost;
+import me.mattlogan.library.Stack.ViewStackHost;
 import com.joeracosta.mapapp.view.StackScreens.RedScreen;
 
 import me.mattlogan.library.BackPressListener;
 import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.ViewStack;
-import me.mattlogan.library.ViewStackDelegate;
+import me.mattlogan.library.Stack.ViewStack;
+import me.mattlogan.library.Stack.ViewStackDelegate;
 
 public class StackHostScreen extends FrameLayout implements ViewStackHost,
         ViewStackDelegate, BackPressListener{
@@ -33,7 +32,7 @@ public class StackHostScreen extends FrameLayout implements ViewStackHost,
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.screen_stack_map, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.stack_host_screen, container, false);
         }
     }
 

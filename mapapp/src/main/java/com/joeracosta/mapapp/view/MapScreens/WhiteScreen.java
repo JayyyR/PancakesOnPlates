@@ -1,6 +1,7 @@
 package com.joeracosta.mapapp.view.MapScreens;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,9 +12,10 @@ import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
 
+import me.mattlogan.library.Screen;
 import me.mattlogan.library.ViewFactory;
 
-public class WhiteScreen extends RelativeLayout{
+public class WhiteScreen extends Screen {
 
     public static class Factory implements ViewFactory {
         @Override
@@ -27,51 +29,38 @@ public class WhiteScreen extends RelativeLayout{
         Log.d("testing", "WhiteScreen (" + hashCode() + ") created");
     }
 
+
     @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        Log.d("testing", "WhiteScreen (" + hashCode() + ") onFinishInflate");
+    protected void onScreenAttached() {
+        Log.d("testing", "WhiteView (" + hashCode() + ") onAttachedToWindow");
+        super.onScreenAttached();
     }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        Log.d("testing", "WhiteScreen (" + hashCode() + ") onAttachedToWindow");
+    protected void onScreenDetatched() {
+        Log.d("testing", "WhiteView (" + hashCode() + ") onDetachedFromWindow");
+        super.onScreenDetatched();
     }
 
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        Log.d("testing", "WhiteScreen (" + hashCode() + ") onDetachedFromWindow");
-    }
-
-    // Note: These instance state saving methods will only be called if the view has an id.
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Log.d("testing", "WhiteScreen (" + hashCode() + ") onSaveInstanceState");
-        return super.onSaveInstanceState();
+    protected Bundle onSaveState(Bundle bundle) {
+        Log.d("testing", "WhiteView (" + hashCode() + ") onSaveInstanceState");
+        return super.onSaveState(bundle);
     }
 
     @Override
-    protected void onRestoreInstanceState(Parcelable savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.d("testing", "WhiteScreen (" + hashCode() + ") onRestoreInstanceState");
+    protected void onRestoreState(Bundle bundle) {
+        Log.d("testing", "WhiteView (" + hashCode() + ") onRestoreInstanceState");
+        super.onRestoreState(bundle);
     }
 
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
+    protected void onScreenVisible() {
+        Log.d("testing", "WhiteView (" + hashCode() + ") VISIBLE");
+    }
 
-        switch (visibility){
-            case VISIBLE:
-                Log.d("testing", "WhiteScreen (" + hashCode() + ") VISIBLE");
-                break;
-            case INVISIBLE:
-                Log.d("testing", "WhiteScreen (" + hashCode() + ") INVISIBLE");
-                break;
-            case GONE:
-                Log.d("testing", "WhiteScreen (" + hashCode() + ") GONE");
-                break;
-        }
+    @Override
+    protected void onScreenGone() {
+        Log.d("testing", "WhiteView (" + hashCode() + ") GONE");
     }
 }

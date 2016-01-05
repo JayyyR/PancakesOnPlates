@@ -1,79 +1,66 @@
 package com.joeracosta.mapapp.view.MapScreens;
 
 import android.content.Context;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
 
+import me.mattlogan.library.Screen;
 import me.mattlogan.library.ViewFactory;
 
-public class PurpleScreen extends RelativeLayout{
+public class PurpleScreen extends Screen{
 
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.screen_green_map, container, false);
+
+            //todo check if getLayout id is 0
+            return LayoutInflater.from(context).inflate(R.layout.purple_screen, container, false);
         }
     }
+
 
     public PurpleScreen(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.d("testing", "PurpleView (" + hashCode() + ") created");
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        Log.d("testing", "PurpleView (" + hashCode() + ") onFinishInflate");
-    }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+    protected void onScreenAttached() {
         Log.d("testing", "PurpleView (" + hashCode() + ") onAttachedToWindow");
+        super.onScreenAttached();
     }
 
-    // Note: This won't be called when we push the next View onto the stack because this View is
-    // kept in the container's view hierarchy. It's visibility is just set to gone.
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+    protected void onScreenDetatched() {
         Log.d("testing", "PurpleView (" + hashCode() + ") onDetachedFromWindow");
+        super.onScreenDetatched();
     }
 
-    // Note: These instance state saving methods will only be called if the view has an id.
     @Override
-    protected Parcelable onSaveInstanceState() {
+    protected Bundle onSaveState(Bundle bundle) {
         Log.d("testing", "PurpleView (" + hashCode() + ") onSaveInstanceState");
-        return super.onSaveInstanceState();
+        return super.onSaveState(bundle);
     }
 
     @Override
-    protected void onRestoreInstanceState(Parcelable savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+    protected void onRestoreState(Bundle bundle) {
         Log.d("testing", "PurpleView (" + hashCode() + ") onRestoreInstanceState");
+        super.onRestoreState(bundle);
     }
 
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
+    protected void onScreenVisible() {
+        Log.d("testing", "PurpleView (" + hashCode() + ") VISIBLE");
+    }
 
-        switch (visibility){
-            case VISIBLE:
-                Log.d("testing", "PurpleView (" + hashCode() + ") VISIBLE");
-                break;
-            case INVISIBLE:
-                Log.d("testing", "PurpleView (" + hashCode() + ") INVISIBLE");
-                break;
-            case GONE:
-                Log.d("testing", "PurpleView (" + hashCode() + ") GONE");
-                break;
-        }
+    @Override
+    protected void onScreenGone() {
+        Log.d("testing", "PurpleView (" + hashCode() + ") GONE");
     }
 }

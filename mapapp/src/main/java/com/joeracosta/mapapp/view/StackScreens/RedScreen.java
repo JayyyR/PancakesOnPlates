@@ -1,27 +1,28 @@
 package com.joeracosta.mapapp.view.StackScreens;
 
 import android.content.Context;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
-import com.joeracosta.mapapp.ViewStackHost;
+
+import me.mattlogan.library.Screen;
+import me.mattlogan.library.Stack.ViewStackHost;
 import com.joeracosta.mapapp.animation.CircularReveal;
 
 import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.ViewStack;
+import me.mattlogan.library.Stack.ViewStack;
 
-public class RedScreen extends RelativeLayout {
+public class RedScreen extends Screen {
 
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.screen_red_stack, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.red_screen, container, false);
         }
     }
 
@@ -30,16 +31,12 @@ public class RedScreen extends RelativeLayout {
         Log.d("testing", "RedView (" + hashCode() + ") created");
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        Log.d("testing", "RedView (" + hashCode() + ") onFinishInflate");
-    }
+
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+    protected void onScreenAttached() {
         Log.d("testing", "RedView (" + hashCode() + ") onAttachedToWindow");
+        super.onScreenAttached();
 
         final ViewStack viewStack = ((ViewStackHost) getParent()).getViewStack();
 
@@ -60,41 +57,31 @@ public class RedScreen extends RelativeLayout {
         });
     }
 
-    // Note: This won't be called when we push the next View onto the stack because this View is
-    // kept in the container's view hierarchy. It's visibility is just set to gone.
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+    protected void onScreenDetatched() {
         Log.d("testing", "RedView (" + hashCode() + ") onDetachedFromWindow");
+        super.onScreenDetatched();
     }
 
-    // Note: These instance state saving methods will only be called if the view has an id.
     @Override
-    protected Parcelable onSaveInstanceState() {
+    protected Bundle onSaveState(Bundle bundle) {
         Log.d("testing", "RedView (" + hashCode() + ") onSaveInstanceState");
-        return super.onSaveInstanceState();
+        return super.onSaveState(bundle);
     }
 
     @Override
-    protected void onRestoreInstanceState(Parcelable savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+    protected void onRestoreState(Bundle bundle) {
         Log.d("testing", "RedView (" + hashCode() + ") onRestoreInstanceState");
+        super.onRestoreState(bundle);
     }
 
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
+    protected void onScreenVisible() {
+        Log.d("testing", "RedView (" + hashCode() + ") VISIBLE");
+    }
 
-        switch (visibility){
-            case VISIBLE:
-                Log.d("testing", "RedView (" + hashCode() + ") VISIBLE");
-                break;
-            case INVISIBLE:
-                Log.d("testing", "RedView (" + hashCode() + ") INVISIBLE");
-                break;
-            case GONE:
-                Log.d("testing", "RedView (" + hashCode() + ") GONE");
-                break;
-        }
+    @Override
+    protected void onScreenGone() {
+        Log.d("testing", "RedView (" + hashCode() + ") GONE");
     }
 }

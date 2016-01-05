@@ -1,28 +1,29 @@
 package com.joeracosta.mapapp.view.StackScreens;
 
 import android.content.Context;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
-import com.joeracosta.mapapp.ViewStackHost;
+
+import me.mattlogan.library.Screen;
+import me.mattlogan.library.Stack.ViewStackHost;
 import com.joeracosta.mapapp.animation.CircularHide;
 import com.joeracosta.mapapp.animation.CircularReveal;
 
 import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.ViewStack;
+import me.mattlogan.library.Stack.ViewStack;
 
-public class GreenScreen extends RelativeLayout {
+public class GreenScreen extends Screen {
 
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.screen_green_stack, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.green_screen, container, false);
         }
     }
 
@@ -31,16 +32,11 @@ public class GreenScreen extends RelativeLayout {
         Log.d("testing", "GreenView (" + hashCode() + ") created");
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        Log.d("testing", "GreenView (" + hashCode() + ") onFinishInflate");
-    }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        Log.d("testing", "GreenView (" + hashCode() + ") onAttachedToWindow");
+    protected void onScreenAttached() {
+        Log.d("testing", "greenview (" + hashCode() + ") onAttachedToWindow");
+        super.onScreenAttached();
 
         final ViewStack viewStack = ((ViewStackHost) getParent()).getViewStack();
 
@@ -61,41 +57,32 @@ public class GreenScreen extends RelativeLayout {
         });
     }
 
-    // Note: This won't be called when we push the next View onto the stack because this View is
-    // kept in the container's view hierarchy. It's visibility is just set to gone.
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        Log.d("testing", "GreenView (" + hashCode() + ") onDetachedFromWindow");
-    }
-
-    // Note: These instance state saving methods will only be called if the view has an id.
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Log.d("testing", "GreenView (" + hashCode() + ") onSaveInstanceState");
-        return super.onSaveInstanceState();
+    protected void onScreenDetatched() {
+        Log.d("testing", "greenview (" + hashCode() + ") onDetachedFromWindow");
+        super.onScreenDetatched();
     }
 
     @Override
-    protected void onRestoreInstanceState(Parcelable savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.d("testing", "GreenView (" + hashCode() + ") onRestoreInstanceState");
+    protected Bundle onSaveState(Bundle bundle) {
+        Log.d("testing", "greenview (" + hashCode() + ") onSaveInstanceState");
+        return super.onSaveState(bundle);
     }
 
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
-
-        switch (visibility){
-            case VISIBLE:
-                Log.d("testing", "GreenView (" + hashCode() + ") VISIBLE");
-                break;
-            case INVISIBLE:
-                Log.d("testing", "GreenView (" + hashCode() + ") INVISIBLE");
-                break;
-            case GONE:
-                Log.d("testing", "GreenView (" + hashCode() + ") GONE");
-                break;
-        }
+    protected void onRestoreState(Bundle bundle) {
+        Log.d("testing", "greenview (" + hashCode() + ") onRestoreInstanceState");
+        super.onRestoreState(bundle);
     }
+
+    @Override
+    protected void onScreenVisible() {
+        Log.d("testing", "greenview (" + hashCode() + ") VISIBLE");
+    }
+
+    @Override
+    protected void onScreenGone() {
+        Log.d("testing", "greenview (" + hashCode() + ") GONE");
+    }
+
 }

@@ -1,27 +1,28 @@
 package com.joeracosta.mapapp.view.StackScreens;
 
 import android.content.Context;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
-import com.joeracosta.mapapp.ViewStackHost;
+
+import me.mattlogan.library.Screen;
+import me.mattlogan.library.Stack.ViewStackHost;
 import com.joeracosta.mapapp.animation.CircularHide;
 
 import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.ViewStack;
+import me.mattlogan.library.Stack.ViewStack;
 
-public class BlueScreen extends RelativeLayout {
+public class BlueScreen extends Screen {
 
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.screen_blue_stack, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.blue_screen, container, false);
         }
     }
 
@@ -30,17 +31,12 @@ public class BlueScreen extends RelativeLayout {
         Log.d("testing", "BlueView (" + hashCode() + ") created");
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        Log.d("testing", "BlueView (" + hashCode() + ") onFinishInflate");
-    }
+
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+    protected void onScreenAttached() {
         Log.d("testing", "BlueView (" + hashCode() + ") onAttachedToWindow");
-
+        super.onScreenAttached();
 
         final ViewStack viewStack = ((ViewStackHost) getParent()).getViewStack();
 
@@ -54,38 +50,30 @@ public class BlueScreen extends RelativeLayout {
     }
 
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+    protected void onScreenDetatched() {
         Log.d("testing", "BlueView (" + hashCode() + ") onDetachedFromWindow");
+        super.onScreenDetatched();
     }
 
-    // Note: These instance state saving methods will only be called if the view has an id.
     @Override
-    protected Parcelable onSaveInstanceState() {
+    protected Bundle onSaveState(Bundle bundle) {
         Log.d("testing", "BlueView (" + hashCode() + ") onSaveInstanceState");
-        return super.onSaveInstanceState();
+        return super.onSaveState(bundle);
     }
 
     @Override
-    protected void onRestoreInstanceState(Parcelable savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+    protected void onRestoreState(Bundle bundle) {
         Log.d("testing", "BlueView (" + hashCode() + ") onRestoreInstanceState");
+        super.onRestoreState(bundle);
     }
 
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
+    protected void onScreenVisible() {
+        Log.d("testing", "BlueView (" + hashCode() + ") VISIBLE");
+    }
 
-        switch (visibility){
-            case VISIBLE:
-                Log.d("testing", "BlueView (" + hashCode() + ") VISIBLE");
-                break;
-            case INVISIBLE:
-                Log.d("testing", "BlueView (" + hashCode() + ") INVISIBLE");
-                break;
-            case GONE:
-                Log.d("testing", "BlueView (" + hashCode() + ") GONE");
-                break;
-        }
+    @Override
+    protected void onScreenGone() {
+        Log.d("testing", "BlueView (" + hashCode() + ") GONE");
     }
 }
