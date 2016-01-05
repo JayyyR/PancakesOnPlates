@@ -54,6 +54,7 @@ public class ViewMap {
      * @param tag    The tag, or "bundle key," for the stored data
      */
     public void saveToBundle(Bundle bundle, String tag) {
+
         checkNotNull(bundle, "bundle == null");
         checkStringNotEmpty(tag, "tag is empty");
         bundle.putSerializable(tag, map);
