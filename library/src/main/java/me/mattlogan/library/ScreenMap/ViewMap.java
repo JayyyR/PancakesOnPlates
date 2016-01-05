@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import me.mattlogan.library.AnimatorFactory;
+import me.mattlogan.library.BackPressListener;
 import me.mattlogan.library.FirstLayoutListener;
 import me.mattlogan.library.ViewFactory;
 
@@ -218,6 +219,18 @@ public class ViewMap {
         for (ViewMapSwappedListener listener : listeners) {
             listener.onStackChanged();
         }
+    }
+
+    /**
+     * Call when back is pressed to determine if showing view is handling a back press
+     * @return true if back is handled, false if not
+     */
+    public boolean onBackPressed(){
+        if (map.get(showingView) != null &&
+                container.findViewById(showingView) instanceof BackPressListener){
+            return ((BackPressListener) container.findViewById(showingView)).onBackPressed();
+        }
+        return false;
     }
 
 }

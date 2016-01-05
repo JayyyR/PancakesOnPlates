@@ -132,6 +132,12 @@ public final class ViewStack {
      */
     public ViewFactory pop() {
         if (!shouldPop()) return null;
+        //check if view wants to do something with back first
+        if (peekView() instanceof BackPressListener){
+            if (((BackPressListener)peek()).onBackPressed()){
+                return null;
+            }
+        }
         ViewFactory popped = stack.pop();
         setBelowViewVisibility(View.VISIBLE);
         container.removeView(peekView());
