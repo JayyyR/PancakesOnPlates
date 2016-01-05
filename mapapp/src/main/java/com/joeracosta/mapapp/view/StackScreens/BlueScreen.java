@@ -1,4 +1,4 @@
-package com.joeracosta.mapapp.view;
+package com.joeracosta.mapapp.view.StackScreens;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -10,15 +10,18 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
+import com.joeracosta.mapapp.ViewStackHost;
+import com.joeracosta.mapapp.animation.CircularHide;
 
 import me.mattlogan.library.ViewFactory;
+import me.mattlogan.library.ViewStack;
 
-public class BlueScreen extends RelativeLayout{
+public class BlueScreen extends RelativeLayout {
 
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.view_blue, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.screen_blue_stack, container, false);
         }
     }
 
@@ -37,6 +40,17 @@ public class BlueScreen extends RelativeLayout{
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Log.d("testing", "BlueView (" + hashCode() + ") onAttachedToWindow");
+
+
+        final ViewStack viewStack = ((ViewStackHost) getParent()).getViewStack();
+
+        findViewById(R.id.blue_button_back).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("testing", "BlueView popping itself");
+                viewStack.popWithAnimation(new CircularHide());
+            }
+        });
     }
 
     @Override

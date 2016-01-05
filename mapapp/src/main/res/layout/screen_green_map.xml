@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.joeracosta.mapapp.view.BlueScreen
+<com.joeracosta.mapapp.view.MapScreens.PurpleScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/blue_screen"
-    android:background="#0000FF"
+    android:id="@id/purple_screen"
+    android:background="#7D26CD"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</com.joeracosta.mapapp.view.BlueScreen>
+</com.joeracosta.mapapp.view.MapScreens.PurpleScreen>

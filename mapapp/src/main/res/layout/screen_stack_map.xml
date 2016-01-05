@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.joeracosta.mapapp.view.GreenScreen
+<com.joeracosta.mapapp.view.MapScreens.StackHostScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/green_screen"
-    android:background="#00FF00"
+    android:id="@id/stackhost_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</com.joeracosta.mapapp.view.GreenScreen>
+</com.joeracosta.mapapp.view.MapScreens.StackHostScreen>

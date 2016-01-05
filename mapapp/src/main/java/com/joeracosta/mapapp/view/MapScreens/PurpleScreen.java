@@ -1,4 +1,4 @@
-package com.joeracosta.mapapp.view;
+package com.joeracosta.mapapp.view.MapScreens;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -13,30 +13,30 @@ import com.joeracosta.mapapp.R;
 
 import me.mattlogan.library.ViewFactory;
 
-public class GreenScreen extends RelativeLayout{
+public class PurpleScreen extends RelativeLayout{
 
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.view_green, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.screen_green_map, container, false);
         }
     }
 
-    public GreenScreen(Context context, AttributeSet attrs) {
+    public PurpleScreen(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.d("testing", "GreenView (" + hashCode() + ") created");
+        Log.d("testing", "PurpleView (" + hashCode() + ") created");
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        Log.d("testing", "GreenView (" + hashCode() + ") onFinishInflate");
+        Log.d("testing", "PurpleView (" + hashCode() + ") onFinishInflate");
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        Log.d("testing", "GreenView (" + hashCode() + ") onAttachedToWindow");
+        Log.d("testing", "PurpleView (" + hashCode() + ") onAttachedToWindow");
     }
 
     // Note: This won't be called when we push the next View onto the stack because this View is
@@ -44,20 +44,20 @@ public class GreenScreen extends RelativeLayout{
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        Log.d("testing", "GreenView (" + hashCode() + ") onDetachedFromWindow");
+        Log.d("testing", "PurpleView (" + hashCode() + ") onDetachedFromWindow");
     }
 
     // Note: These instance state saving methods will only be called if the view has an id.
     @Override
     protected Parcelable onSaveInstanceState() {
-        Log.d("testing", "GreenView (" + hashCode() + ") onSaveInstanceState");
+        Log.d("testing", "PurpleView (" + hashCode() + ") onSaveInstanceState");
         return super.onSaveInstanceState();
     }
 
     @Override
     protected void onRestoreInstanceState(Parcelable savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.d("testing", "GreenView (" + hashCode() + ") onRestoreInstanceState");
+        Log.d("testing", "PurpleView (" + hashCode() + ") onRestoreInstanceState");
     }
 
     @Override
@@ -66,13 +66,13 @@ public class GreenScreen extends RelativeLayout{
 
         switch (visibility){
             case VISIBLE:
-                Log.d("testing", "GreenView (" + hashCode() + ") VISIBLE");
+                Log.d("testing", "PurpleView (" + hashCode() + ") VISIBLE");
                 break;
             case INVISIBLE:
-                Log.d("testing", "GreenView (" + hashCode() + ") INVISIBLE");
+                Log.d("testing", "PurpleView (" + hashCode() + ") INVISIBLE");
                 break;
             case GONE:
-                Log.d("testing", "GreenView (" + hashCode() + ") GONE");
+                Log.d("testing", "PurpleView (" + hashCode() + ") GONE");
                 break;
         }
     }

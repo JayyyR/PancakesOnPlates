@@ -1,4 +1,4 @@
-package com.joeracosta.mapapp.view;
+package com.joeracosta.mapapp.view.StackScreens;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -10,15 +10,18 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
+import com.joeracosta.mapapp.ViewStackHost;
+import com.joeracosta.mapapp.animation.CircularReveal;
 
 import me.mattlogan.library.ViewFactory;
+import me.mattlogan.library.ViewStack;
 
-public class RedScreen extends RelativeLayout{
+public class RedScreen extends RelativeLayout {
 
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.view_red, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.screen_red_stack, container, false);
         }
     }
 
@@ -37,6 +40,24 @@ public class RedScreen extends RelativeLayout{
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Log.d("testing", "RedView (" + hashCode() + ") onAttachedToWindow");
+
+        final ViewStack viewStack = ((ViewStackHost) getParent()).getViewStack();
+
+        findViewById(R.id.red_button_back).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("testing", "RedView popping itself");
+                viewStack.pop();
+            }
+        });
+
+        findViewById(R.id.red_button_go_to_green).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("testing", "RedView pushing GreenView");
+                viewStack.pushWithAnimation(new GreenScreen.Factory(), new CircularReveal());
+            }
+        });
     }
 
     // Note: This won't be called when we push the next View onto the stack because this View is
