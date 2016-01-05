@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
 
-import me.mattlogan.library.ViewStack;
-import me.mattlogan.library.ViewStackDelegate;
+import me.mattlogan.library.Stack.ViewStack;
+import me.mattlogan.library.Stack.ViewStackDelegate;
 import me.mattlogan.pancakes.view.RedView;
 
 public class MainActivity extends AppCompatActivity

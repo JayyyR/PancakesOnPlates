@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.ViewStack;
+import me.mattlogan.library.Stack.ViewStack;
 import me.mattlogan.pancakes.animation.CircularHide;
 import me.mattlogan.pancakes.animation.CircularReveal;
 import me.mattlogan.pancakes.R;
