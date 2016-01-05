@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package me.mattlogan.library.Stack;
 
 /**
  * Interface for "finishing" a navigation stack. The intended implementation is calling finish()

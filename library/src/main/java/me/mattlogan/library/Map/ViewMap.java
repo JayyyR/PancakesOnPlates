@@ -1,4 +1,4 @@
-package me.mattlogan.library.ScreenMap;
+package me.mattlogan.library.Map;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -23,7 +23,7 @@ import static me.mattlogan.library.Preconditions.checkStringNotEmpty;
  * This is a class used as a Map for Views. Hosts can use this class to contain many views that
  * don't have a hierarchy.
  */
-public class ViewMap {
+public final class ViewMap {
 
     private static final String SHOWING_VIEW_TAG = "com.jracosta.showingView";
 
@@ -217,7 +217,7 @@ public class ViewMap {
 
     private void notifyListeners() {
         for (ViewMapSwappedListener listener : listeners) {
-            listener.onStackChanged();
+            listener.onViewSwapped();
         }
     }
 

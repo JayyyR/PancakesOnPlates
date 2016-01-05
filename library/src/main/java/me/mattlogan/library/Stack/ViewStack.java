@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package me.mattlogan.library.Stack;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
+
+import me.mattlogan.library.AnimatorFactory;
+import me.mattlogan.library.BackPressListener;
+import me.mattlogan.library.FirstLayoutListener;
+import me.mattlogan.library.ViewFactory;
 
 import static me.mattlogan.library.Preconditions.checkNotNull;
 import static me.mattlogan.library.Preconditions.checkStringNotEmpty;
@@ -157,6 +162,12 @@ public final class ViewStack {
     public ViewFactory popWithAnimation(AnimatorFactory animatorFactory) {
         checkNotNull(animatorFactory, "animatorFactory == null");
         if (!shouldPop()) return null;
+        //check if view wants to do something with back first
+        if (peekView() instanceof BackPressListener){
+            if (((BackPressListener)peek()).onBackPressed()){
+                return null;
+            }
+        }
         ViewFactory popped = stack.pop();
         setBelowViewVisibility(View.VISIBLE);
         startAnimation(animatorFactory, peekView(), popAnimationListener);

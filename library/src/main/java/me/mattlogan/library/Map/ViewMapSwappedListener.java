@@ -1,9 +1,9 @@
-package me.mattlogan.library.ScreenMap;
+package me.mattlogan.library.Map;
 
 /**
  * Created by Joe on 1/4/2016.
  */
 public interface ViewMapSwappedListener {
 
-    void onStackChanged();
+    void onViewSwapped();
 }

@@ -17,6 +17,10 @@ import org.mockito.stubbing.Answer;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
+import me.mattlogan.library.Stack.StackChangedListener;
+import me.mattlogan.library.Stack.ViewStack;
+import me.mattlogan.library.Stack.ViewStackDelegate;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -34,10 +38,12 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ViewStackTest {
 
-    @Mock ViewStackDelegate delegate;
+    @Mock
+    ViewStackDelegate delegate;
     @Mock ViewGroup container;
 
-    @Mock StackChangedListener stackChangedListener1;
+    @Mock
+    StackChangedListener stackChangedListener1;
     @Mock StackChangedListener stackChangedListener2;
 
     ViewStack viewStack;

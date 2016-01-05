@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package me.mattlogan.library.Stack;
 
 /**
  * Listener interface for stack-changed events
