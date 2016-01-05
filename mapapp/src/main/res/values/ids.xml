@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="green_screen" />
+    <item type="id" name="red_screen" />
+    <item type="id" name="blue_screen" />
+</resources>

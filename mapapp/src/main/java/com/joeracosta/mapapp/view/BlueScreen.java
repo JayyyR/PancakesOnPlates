@@ -1,4 +1,4 @@
-package me.mattlogan.pancakes.view;
+package com.joeracosta.mapapp.view;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -9,13 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.ViewStack;
-import me.mattlogan.pancakes.animation.CircularHide;
-import me.mattlogan.pancakes.R;
-import me.mattlogan.pancakes.ViewStackActivity;
+import com.joeracosta.mapapp.R;
 
-public class BlueView extends RelativeLayout {
+import me.mattlogan.library.ViewFactory;
+
+public class BlueScreen extends RelativeLayout{
 
     public static class Factory implements ViewFactory {
         @Override
@@ -24,7 +22,7 @@ public class BlueView extends RelativeLayout {
         }
     }
 
-    public BlueView(Context context, AttributeSet attrs) {
+    public BlueScreen(Context context, AttributeSet attrs) {
         super(context, attrs);
         Log.d("testing", "BlueView (" + hashCode() + ") created");
     }
@@ -33,16 +31,6 @@ public class BlueView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         Log.d("testing", "BlueView (" + hashCode() + ") onFinishInflate");
-
-        final ViewStack viewStack = ((ViewStackActivity) getContext()).viewStack();
-
-        findViewById(R.id.blue_button_back).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("testing", "BlueView popping itself");
-                viewStack.popWithAnimation(new CircularHide());
-            }
-        });
     }
 
     @Override

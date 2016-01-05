@@ -1,14 +1,14 @@
 package me.mattlogan.library;
 
-final class Preconditions {
+final public class Preconditions {
 
-    static void checkNotNull(Object o, String message) {
+    public static void checkNotNull(Object o, String message) {
         if (o == null) {
             throw new NullPointerException(message);
         }
     }
 
-    static void checkStringNotEmpty(String s, String message) {
+    public static void checkStringNotEmpty(String s, String message) {
         if (s == null || s.isEmpty()) {
             throw new IllegalArgumentException(message);
         }

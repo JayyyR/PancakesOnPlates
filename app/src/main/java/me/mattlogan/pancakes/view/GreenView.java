@@ -80,4 +80,21 @@ public class GreenView extends RelativeLayout {
         super.onRestoreInstanceState(savedInstanceState);
         Log.d("testing", "GreenView (" + hashCode() + ") onRestoreInstanceState");
     }
+
+    @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+
+        switch (visibility){
+            case VISIBLE:
+                Log.d("testing", "GreenView (" + hashCode() + ") VISIBLE");
+                break;
+            case INVISIBLE:
+                Log.d("testing", "GreenView (" + hashCode() + ") INVISIBLE");
+                break;
+            case GONE:
+                Log.d("testing", "GreenView (" + hashCode() + ") GONE");
+                break;
+        }
+    }
 }

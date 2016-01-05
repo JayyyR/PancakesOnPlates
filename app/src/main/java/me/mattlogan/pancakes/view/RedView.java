@@ -79,4 +79,21 @@ public class RedView extends RelativeLayout {
         super.onRestoreInstanceState(savedInstanceState);
         Log.d("testing", "RedView (" + hashCode() + ") onRestoreInstanceState");
     }
+
+    @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+
+        switch (visibility){
+            case VISIBLE:
+                Log.d("testing", "RedView (" + hashCode() + ") VISIBLE");
+                break;
+            case INVISIBLE:
+                Log.d("testing", "RedView (" + hashCode() + ") INVISIBLE");
+                break;
+            case GONE:
+                Log.d("testing", "RedView (" + hashCode() + ") GONE");
+                break;
+        }
+    }
 }

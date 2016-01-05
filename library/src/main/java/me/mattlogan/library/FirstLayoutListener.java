@@ -3,12 +3,12 @@ package me.mattlogan.library;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-abstract class FirstLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
+public abstract class FirstLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
 
     private final View view;
     private boolean first = true;
 
-    FirstLayoutListener(View view) {
+    protected FirstLayoutListener(View view) {
         this.view = view;
     }
 
@@ -20,5 +20,5 @@ abstract class FirstLayoutListener implements ViewTreeObserver.OnGlobalLayoutLis
         }
     }
 
-    abstract void onFirstLayout(View view);
+    protected abstract void onFirstLayout(View view);
 }
