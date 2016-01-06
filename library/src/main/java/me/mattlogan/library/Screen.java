@@ -110,11 +110,6 @@ public abstract class Screen extends FrameLayout{
                     onScreenVisible();
                 }
                 break;
-            case INVISIBLE:
-                if (changedView == this || getVisibility() != INVISIBLE) {
-                    onScreenInvisible();
-                }
-                break;
             case GONE:
                 if (changedView == this || getVisibility() != GONE) {
                     onScreenGone();

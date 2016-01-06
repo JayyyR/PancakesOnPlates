@@ -97,8 +97,8 @@ public final class ViewStack {
     private void pushWithoutNotifyingListeners(ViewFactory viewFactory) {
         stack.push(viewFactory);
         View view = viewFactory.createView(container.getContext(), container);
+        setCurrentViewVisibility(View.GONE);
         container.addView(view);
-        setBelowViewVisibility(View.GONE);
     }
 
     /**
@@ -141,8 +141,8 @@ public final class ViewStack {
             return null;
         }
         ViewFactory popped = stack.pop();
-        setBelowViewVisibility(View.VISIBLE);
         container.removeView(peekView());
+        setCurrentViewVisibility(View.VISIBLE);
         notifyListeners();
         return popped;
     }
@@ -252,6 +252,12 @@ public final class ViewStack {
         }
     }
 
+    private void setCurrentViewVisibility(int visibility){
+        if (container.getChildCount() >= 1){
+            container.getChildAt(container.getChildCount() -1).setVisibility(visibility);
+        }
+    }
+
     private void startAnimation(AnimatorFactory animatorFactory, View view,
                                 Animator.AnimatorListener listener) {
         Animator animator = animatorFactory.createAnimator(view);
@@ -260,7 +266,6 @@ public final class ViewStack {
     }
 
     private boolean shouldPop() {
-
         if (size() == 0) {
             throw new EmptyStackException();
         }
