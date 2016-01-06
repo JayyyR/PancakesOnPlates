@@ -18,12 +18,9 @@ public class PurpleScreen extends Screen{
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-
-            //todo check if getLayout id is 0
             return LayoutInflater.from(context).inflate(R.layout.purple_screen, container, false);
         }
     }
-
 
     public PurpleScreen(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -37,9 +34,14 @@ public class PurpleScreen extends Screen{
     }
 
     @Override
-    protected void onScreenDetatched() {
+    public int getViewId() {
+        return R.id.purple_screen;
+    }
+
+    @Override
+    protected void onScreenDetached() {
         Log.d("testing", "PurpleView (" + hashCode() + ") onDetachedFromWindow");
-        super.onScreenDetatched();
+        super.onScreenDetached();
     }
 
     @Override

@@ -2,13 +2,11 @@ package com.joeracosta.mapapp.view.MapScreens;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.joeracosta.mapapp.R;
 
@@ -20,7 +18,7 @@ public class WhiteScreen extends Screen {
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.screen_blue_map, container, false);
+            return LayoutInflater.from(context).inflate(R.layout.white_screen, container, false);
         }
     }
 
@@ -37,9 +35,15 @@ public class WhiteScreen extends Screen {
     }
 
     @Override
-    protected void onScreenDetatched() {
+    public int getViewId() {
+        return R.id.white_screen;
+    }
+
+
+    @Override
+    protected void onScreenDetached() {
         Log.d("testing", "WhiteView (" + hashCode() + ") onDetachedFromWindow");
-        super.onScreenDetatched();
+        super.onScreenDetached();
     }
 
     @Override

@@ -58,9 +58,14 @@ public class RedScreen extends Screen {
     }
 
     @Override
-    protected void onScreenDetatched() {
+    public int getViewId() {
+        return R.id.red_screen;
+    }
+
+    @Override
+    protected void onScreenDetached() {
         Log.d("testing", "RedView (" + hashCode() + ") onDetachedFromWindow");
-        super.onScreenDetatched();
+        super.onScreenDetached();
     }
 
     @Override

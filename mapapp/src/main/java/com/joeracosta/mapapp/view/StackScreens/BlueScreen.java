@@ -50,9 +50,14 @@ public class BlueScreen extends Screen {
     }
 
     @Override
-    protected void onScreenDetatched() {
+    public int getViewId() {
+        return R.id.blue_screen;
+    }
+
+    @Override
+    protected void onScreenDetached() {
         Log.d("testing", "BlueView (" + hashCode() + ") onDetachedFromWindow");
-        super.onScreenDetatched();
+        super.onScreenDetached();
     }
 
     @Override

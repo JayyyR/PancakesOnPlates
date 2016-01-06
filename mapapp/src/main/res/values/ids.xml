@@ -3,4 +3,8 @@
     <item type="id" name="purple_screen" />
     <item type="id" name="stackhost_screen" />
     <item type="id" name="white_screen" />
+    <item type="id" name="blue_screen" />
+    <item type="id" name="green_screen" />
+    <item type="id" name="red_screen" />
+
 </resources>

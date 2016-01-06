@@ -58,9 +58,14 @@ public class GreenScreen extends Screen {
     }
 
     @Override
-    protected void onScreenDetatched() {
+    public int getViewId() {
+        return R.id.green_screen;
+    }
+
+    @Override
+    protected void onScreenDetached() {
         Log.d("testing", "greenview (" + hashCode() + ") onDetachedFromWindow");
-        super.onScreenDetatched();
+        super.onScreenDetached();
     }
 
     @Override
