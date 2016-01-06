@@ -4,21 +4,23 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 /**
  * Created by Joe on 1/4/2016.
+ * Abstract Class that adds convenience methods to a View. A Screen should be though of as one Screen
+ * on the device. It can contain one view. It can contain many custom views. The implemenation
+ * of this class should contain a ViewFactory so it can be properly added to a ViewStack or ViewMap.
  */
 public abstract class Screen extends FrameLayout{
 
-    private static String INSTANCE_STATE = "com.joeracosta.instanceState";
+    private static String INSTANCE_STATE = "com.joeracosta.screen.instanceState";
     private boolean mRestored;
 
     public Screen(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setId(getViewId());
     }
 
     protected boolean isRestored(){
@@ -29,7 +31,7 @@ public abstract class Screen extends FrameLayout{
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        if (getId() == 0){
+        if (getId() == View.NO_ID){
             //Todo throw exception, need ID
         }
         onScreenAttached();
@@ -41,14 +43,27 @@ public abstract class Screen extends FrameLayout{
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         onScreenGone();
-        onScreenDetatched();
+        onScreenDetached();
     }
 
+    /**
+     * Called when a screen is attached to the window.
+     */
     protected void onScreenAttached(){
-
     }
 
-    protected void onScreenDetatched(){
+    /**
+     * Must return a unique view id. This is the id that the Screen's view will be set to as soon as it's created.
+     * Best practice would be to define your screen IDs in your values resource folder and use those.
+     * @return a unique id for this Screen
+     */
+    public abstract int getViewId();
+
+    /**
+     * Called when a Screen is detached from the window. This won't necessarily be called
+     * just because a Screen is no longer visible to the user.
+     */
+    protected void onScreenDetached(){
 
     }
 
