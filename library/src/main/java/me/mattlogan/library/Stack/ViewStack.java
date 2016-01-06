@@ -136,12 +136,9 @@ public final class ViewStack {
      * navigation stack
      */
     public ViewFactory pop() {
-        if (!shouldPop()) return null;
-        //check if view wants to do something with back first
-        if (peekView() instanceof BackPressListener){
-            if (((BackPressListener)peek()).onBackPressed()){
-                return null;
-            }
+        if (!shouldPop()){
+            delegate.finishStack();
+            return null;
         }
         ViewFactory popped = stack.pop();
         setBelowViewVisibility(View.VISIBLE);
@@ -152,7 +149,7 @@ public final class ViewStack {
 
     /**
      * Pops the top View off the navigation stack and animates it using the Animator created by the
-     * provided AnimatorFactory
+     * provided AnimatorFactory.
      *
      * @param animatorFactory responsible for the creation of an Animator to animate the current
      *                        View off the navigation stack
@@ -161,12 +158,9 @@ public final class ViewStack {
      */
     public ViewFactory popWithAnimation(AnimatorFactory animatorFactory) {
         checkNotNull(animatorFactory, "animatorFactory == null");
-        if (!shouldPop()) return null;
-        //check if view wants to do something with back first
-        if (peekView() instanceof BackPressListener){
-            if (((BackPressListener)peek()).onBackPressed()){
-                return null;
-            }
+        if (!shouldPop()) {
+            delegate.finishStack();
+            return null;
         }
         ViewFactory popped = stack.pop();
         setBelowViewVisibility(View.VISIBLE);
@@ -266,19 +260,62 @@ public final class ViewStack {
     }
 
     private boolean shouldPop() {
+
         if (size() == 0) {
             throw new EmptyStackException();
         }
-        if (size() == 1) {
-            delegate.finishStack();
-            return false;
-        }
-        return true;
+
+        return size() != 1;
     }
 
     private void notifyListeners() {
         for (StackChangedListener listener : listeners) {
             listener.onStackChanged();
         }
+    }
+
+    /**
+     * Call this when a user presses back. If the view showing implements BackPressListener, that will
+     * get called. Otherwise a view will pop from the stack.
+     * @return true if the back press was handled, false if it wasn't.
+     */
+    public boolean onBackPressed(){
+        //check if view wants to do something with back first
+        if (peekView() instanceof BackPressListener){
+            if (((BackPressListener)peek()).onBackPressed()){
+                return true;
+            }
+        }
+
+        if (shouldPop()){
+            pop();
+            return true;
+        }
+
+        //one view left
+        return false;
+    }
+
+    /**
+     * Call this when a user presses back and you want to pop with an animation. If the view showing
+     * impilements BackPressListener, that will get called. If not, it will pop with the supplied
+     * animation.
+     * @return true if the back press was handled, false if it wasn't.
+     */
+    public boolean onBackPressed(AnimatorFactory animatorFactory){
+        //check if view wants to do something with back first
+        if (peekView() instanceof BackPressListener){
+            if (((BackPressListener)peek()).onBackPressed()){
+                return true;
+            }
+        }
+
+        if (shouldPop()){
+            popWithAnimation(animatorFactory);
+            return true;
+        }
+
+        //one view left
+        return false;
     }
 }
