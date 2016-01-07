@@ -52,7 +52,7 @@ public class RedScreen extends Screen {
             @Override
             public void onClick(View v) {
                 Log.d("testing", "RedView pushing GreenView");
-                viewStack.pushWithAnimation(new GreenScreen.Factory(), new CircularReveal());
+                viewStack.push(new GreenScreen.Factory());
             }
         });
     }

@@ -26,7 +26,6 @@ public class StackHostScreen extends Screen implements ViewStackHost,
 
     private ViewStack viewStack;
 
-
     public static class Factory implements ViewFactory {
         @Override
         public View createView(Context context, ViewGroup container) {
@@ -98,7 +97,6 @@ public class StackHostScreen extends Screen implements ViewStackHost,
 
     @Override
     public boolean onBackPressed() {
-        viewStack.pop();
-        return true;
+        return viewStack.onBackPressed();
     }
 }
