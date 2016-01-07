@@ -20,6 +20,8 @@ import me.mattlogan.library.Stack.ViewStack;
 
 public class GreenScreen extends Screen {
 
+    public static String TEST_GREEN_KEY = "testgreenkey";
+
     public static class Factory extends ViewFactory {
         @Override
         public int getLayoutResource() {
@@ -52,7 +54,13 @@ public class GreenScreen extends Screen {
             @Override
             public void onClick(View v) {
                 Log.d("testing", "GreenView pushing BlueView");
-                viewStack.pushWithAnimation(new BlueScreen.Factory(), new CircularReveal());
+
+                Bundle data = new Bundle();
+                data.putString(TEST_GREEN_KEY, "From Green Screen");
+
+                BlueScreen.Factory blueFactory = new BlueScreen.Factory();
+                blueFactory.passData(data);
+                viewStack.pushWithAnimation(blueFactory, new CircularReveal());
             }
         });
     }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.joeracosta.mapapp.R;
 
@@ -75,6 +76,16 @@ public class BlueScreen extends Screen {
     @Override
     protected void onScreenVisible() {
         Log.d("testing", "BlueView (" + hashCode() + ") VISIBLE");
+        Bundle data = getPassedData();
+        if (data != null){
+            String toast = data.getString(GreenScreen.TEST_GREEN_KEY);
+
+            if (toast != null){
+
+                Toast.makeText(getContext(), toast,
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override

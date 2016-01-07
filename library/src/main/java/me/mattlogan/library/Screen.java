@@ -32,8 +32,16 @@ public abstract class Screen extends FrameLayout{
         mPassedData = dataToPass;
     }
 
+    /**
+     * Call this to get the data that was passed to this Screen. Once you call this
+     * the data is cleared. In other words, two consecutive calls to this will yield the appropriate
+     * bundle and null respectively.
+     * @return the data that was passed to this Screen
+     */
     public Bundle getPassedData(){
-        return mPassedData;
+        Bundle tempData = mPassedData;
+        mPassedData = null;
+        return tempData;
     }
 
     protected boolean isRestored(){

@@ -118,10 +118,10 @@ public final class ViewMap {
 
             //pass any bundle to the screen if it was set. This is called here since we're not
             //recreating the view in this instance but may still want to pass data if it was set
-            if (viewToFront instanceof Screen && viewFactory.getPassedData() != null) {
-                ((Screen) viewToFront).setPassedData(viewFactory.getPassedData());
+            if (viewToFront instanceof Screen && viewFactory.getDataToPass() != null) {
+                ((Screen) viewToFront).setPassedData(viewFactory.getDataToPass());
             }
-            viewFactory.passData(null); //reset data in ViewFactory to null
+            viewFactory.deleteDataToPass(); //reset data in ViewFactory to null
 
             container.bringChildToFront(viewToFront);
         }

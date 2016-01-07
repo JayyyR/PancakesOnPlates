@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.joeracosta.mapapp.R;
 
 import me.mattlogan.library.Screen;
 import me.mattlogan.library.Stack.ViewStackHost;
-import com.joeracosta.mapapp.animation.CircularReveal;
 
 import me.mattlogan.library.ViewFactory;
 import me.mattlogan.library.Stack.ViewStack;
@@ -52,15 +50,7 @@ public class RedScreen extends Screen {
             @Override
             public void onClick(View v) {
                 Log.d("testing", "RedView pushing GreenView");
-
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("test", 154);
-
-                GreenScreen.Factory greenFactory = new GreenScreen.Factory();
-                greenFactory.passData(bundle);
-
-                viewStack.push(greenFactory);
+                viewStack.push(new GreenScreen.Factory());
             }
         });
     }

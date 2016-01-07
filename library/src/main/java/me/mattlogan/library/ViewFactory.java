@@ -13,16 +13,16 @@ import java.io.Serializable;
  */
 public abstract class ViewFactory implements Serializable {
 
-    private Bundle mPassedData;
+    private Bundle mDataToPass;
 
     public View createView(Context context, ViewGroup container) {
         View view = LayoutInflater.from(context).inflate(getLayoutResource(), container, false);
 
         //if our view is a screen, pass our bundle to it
-        if (view instanceof Screen && mPassedData != null) {
-            ((Screen) view).setPassedData(mPassedData);
+        if (view instanceof Screen && mDataToPass != null) {
+            ((Screen) view).setPassedData(mDataToPass);
         }
-        mPassedData = null;
+        deleteDataToPass();
         return view;
     }
 
@@ -33,7 +33,11 @@ public abstract class ViewFactory implements Serializable {
      * @param data the bundle of data you want to pass
      */
     public void passData(Bundle data){
-        mPassedData = data;
+        mDataToPass = data;
+    }
+
+    public void deleteDataToPass(){
+        mDataToPass = null;
     }
 
     /**
@@ -41,7 +45,7 @@ public abstract class ViewFactory implements Serializable {
      */
     public abstract int getLayoutResource();
 
-    public Bundle getPassedData(){
-        return mPassedData;
+    public Bundle getDataToPass(){
+        return mDataToPass;
     }
 }
