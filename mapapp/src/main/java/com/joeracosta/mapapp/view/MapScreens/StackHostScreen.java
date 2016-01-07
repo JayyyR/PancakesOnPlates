@@ -26,10 +26,10 @@ public class StackHostScreen extends Screen implements ViewStackHost,
 
     private ViewStack viewStack;
 
-    public static class Factory implements ViewFactory {
+    public static class Factory extends ViewFactory {
         @Override
-        public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.stack_host_screen, container, false);
+        public int getLayoutResource() {
+            return R.layout.stack_host_screen;
         }
     }
 

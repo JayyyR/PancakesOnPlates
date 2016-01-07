@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.joeracosta.mapapp.R;
 
@@ -15,10 +16,13 @@ import me.mattlogan.library.ViewFactory;
 
 public class WhiteScreen extends Screen {
 
-    public static class Factory implements ViewFactory {
+    public static String TEST_KEY_PASS = "testkeypass";
+
+    public static class Factory extends ViewFactory {
+
         @Override
-        public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.white_screen, container, false);
+        public int getLayoutResource() {
+            return R.layout.white_screen;
         }
     }
 
@@ -61,6 +65,18 @@ public class WhiteScreen extends Screen {
     @Override
     protected void onScreenVisible() {
         Log.d("testing", "WhiteView (" + hashCode() + ") VISIBLE");
+
+        Bundle passedData = getPassedData();
+        if (passedData != null){
+            String toast = passedData.getString(TEST_KEY_PASS);
+
+            if (toast != null){
+
+                Toast.makeText(getContext(), toast,
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
     @Override

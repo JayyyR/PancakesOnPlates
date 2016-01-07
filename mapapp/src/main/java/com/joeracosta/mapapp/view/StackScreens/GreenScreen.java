@@ -20,10 +20,10 @@ import me.mattlogan.library.Stack.ViewStack;
 
 public class GreenScreen extends Screen {
 
-    public static class Factory implements ViewFactory {
+    public static class Factory extends ViewFactory {
         @Override
-        public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.green_screen, container, false);
+        public int getLayoutResource() {
+            return R.layout.green_screen;
         }
     }
 

@@ -17,10 +17,23 @@ public abstract class Screen extends FrameLayout{
 
     private static String INSTANCE_STATE = "com.joeracosta.screen.instanceState";
     private boolean mRestored;
+    private Bundle mPassedData;
 
     public Screen(Context context, AttributeSet attrs) {
         super(context, attrs);
         setId(getViewId());
+    }
+
+    /**
+     * Call this when you want to give your Screen some data
+     * @param dataToPass the Bundle of data you're passing over
+     */
+    public void setPassedData(Bundle dataToPass){
+        mPassedData = dataToPass;
+    }
+
+    public Bundle getPassedData(){
+        return mPassedData;
     }
 
     protected boolean isRestored(){

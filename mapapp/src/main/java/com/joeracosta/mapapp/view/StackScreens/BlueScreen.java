@@ -19,10 +19,10 @@ import me.mattlogan.library.Stack.ViewStack;
 
 public class BlueScreen extends Screen {
 
-    public static class Factory implements ViewFactory {
+    public static class Factory extends ViewFactory {
         @Override
-        public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.blue_screen, container, false);
+        public int getLayoutResource() {
+            return R.layout.blue_screen;
         }
     }
 

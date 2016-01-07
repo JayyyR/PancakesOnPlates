@@ -15,10 +15,10 @@ import me.mattlogan.library.ViewFactory;
 
 public class PurpleScreen extends Screen{
 
-    public static class Factory implements ViewFactory {
+    public static class Factory extends ViewFactory {
         @Override
-        public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.purple_screen, container, false);
+        public int getLayoutResource() {
+            return R.layout.purple_screen;
         }
     }
 

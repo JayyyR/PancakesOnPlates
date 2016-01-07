@@ -13,6 +13,7 @@ import java.util.List;
 import me.mattlogan.library.AnimatorFactory;
 import me.mattlogan.library.BackPressListener;
 import me.mattlogan.library.FirstLayoutListener;
+import me.mattlogan.library.Screen;
 import me.mattlogan.library.ViewFactory;
 
 import static me.mattlogan.library.Preconditions.checkNotNull;
@@ -114,6 +115,14 @@ public final class ViewMap {
         }
         else{
             View viewToFront = container.findViewById(key);
+
+            //pass any bundle to the screen if it was set. This is called here since we're not
+            //recreating the view in this instance but may still want to pass data if it was set
+            if (viewToFront instanceof Screen && viewFactory.getPassedData() != null) {
+                ((Screen) viewToFront).setPassedData(viewFactory.getPassedData());
+            }
+            viewFactory.passData(null); //reset data in ViewFactory to null
+
             container.bringChildToFront(viewToFront);
         }
         setAppropriateVisibility();
@@ -231,6 +240,10 @@ public final class ViewMap {
             return ((BackPressListener) container.findViewById(showingView)).onBackPressed();
         }
         return false;
+    }
+
+    public int getShowingViewID(){
+        return showingView;
     }
 
 }

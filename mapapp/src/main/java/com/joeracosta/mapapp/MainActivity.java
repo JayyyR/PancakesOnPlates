@@ -64,7 +64,19 @@ public class MainActivity extends AppCompatActivity implements ViewMapHost {
                     viewMap.show(R.id.purple_screen, new PurpleScreen.Factory());
                     break;
                 case 2:
-                    viewMap.show(R.id.white_screen, new WhiteScreen.Factory());
+                    String test;
+                    if (viewMap.getShowingViewID() == R.id.stackhost_screen){
+                        test = "From Stack Host Screen";
+                    }
+                    else{
+                        test = "From Purple Screen";
+                    }
+                    Bundle data = new Bundle();
+                    data.putString(WhiteScreen.TEST_KEY_PASS, test);
+
+                    WhiteScreen.Factory whiteFactory = new WhiteScreen.Factory();
+                    whiteFactory.passData(data);
+                    viewMap.show(R.id.white_screen, whiteFactory);
                     break;
             }
             drawerList.setItemChecked(position, true);

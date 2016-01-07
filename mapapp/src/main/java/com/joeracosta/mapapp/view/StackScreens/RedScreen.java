@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,10 +18,11 @@ import me.mattlogan.library.Stack.ViewStack;
 
 public class RedScreen extends Screen {
 
-    public static class Factory implements ViewFactory {
+    public static class Factory extends ViewFactory {
+
         @Override
-        public View createView(Context context, ViewGroup container) {
-            return LayoutInflater.from(context).inflate(R.layout.red_screen, container, false);
+        public int getLayoutResource() {
+            return R.layout.red_screen;
         }
     }
 
@@ -52,7 +52,15 @@ public class RedScreen extends Screen {
             @Override
             public void onClick(View v) {
                 Log.d("testing", "RedView pushing GreenView");
-                viewStack.push(new GreenScreen.Factory());
+
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("test", 154);
+
+                GreenScreen.Factory greenFactory = new GreenScreen.Factory();
+                greenFactory.passData(bundle);
+
+                viewStack.push(greenFactory);
             }
         });
     }
