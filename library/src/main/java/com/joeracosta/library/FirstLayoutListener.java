@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package com.joeracosta.library;
 
 import android.view.View;
 import android.view.ViewTreeObserver;

@@ -1,1 +1,1 @@
-include ':app', ':library', ':mapapp'
+include ':library', ':mapapp'

@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package com.joeracosta.library;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -162,6 +162,7 @@ public abstract class Screen extends FrameLayout{
      * it is not visible
      */
     protected void onScreenGone(){
+        mPassedData = null;
 
     }
 

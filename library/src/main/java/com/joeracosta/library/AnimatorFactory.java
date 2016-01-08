@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package com.joeracosta.library;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;

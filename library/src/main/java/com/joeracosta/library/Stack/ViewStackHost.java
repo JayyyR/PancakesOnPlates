@@ -1,6 +1,4 @@
-package me.mattlogan.library.Stack;
-
-import me.mattlogan.library.Stack.ViewStack;
+package com.joeracosta.library.Stack;
 
 /**
  * Created by Joe on 1/4/2016.

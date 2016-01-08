@@ -1,4 +1,4 @@
-package me.mattlogan.library.Stack;
+package com.joeracosta.library.Stack;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -11,13 +11,13 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
-import me.mattlogan.library.AnimatorFactory;
-import me.mattlogan.library.BackPressListener;
-import me.mattlogan.library.FirstLayoutListener;
-import me.mattlogan.library.ViewFactory;
+import com.joeracosta.library.AnimatorFactory;
+import com.joeracosta.library.BackPressListener;
+import com.joeracosta.library.FirstLayoutListener;
+import com.joeracosta.library.ViewFactory;
 
-import static me.mattlogan.library.Preconditions.checkNotNull;
-import static me.mattlogan.library.Preconditions.checkStringNotEmpty;
+import static com.joeracosta.library.Preconditions.checkNotNull;
+import static com.joeracosta.library.Preconditions.checkStringNotEmpty;
 
 /**
  * This manages a navigation stack by representing each item in the stack as a ViewFactory, which is

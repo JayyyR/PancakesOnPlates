@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package com.joeracosta.library;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -17,9 +17,9 @@ import org.mockito.stubbing.Answer;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-import me.mattlogan.library.Stack.StackChangedListener;
-import me.mattlogan.library.Stack.ViewStack;
-import me.mattlogan.library.Stack.ViewStackDelegate;
+import com.joeracosta.library.Stack.StackChangedListener;
+import com.joeracosta.library.Stack.ViewStack;
+import com.joeracosta.library.Stack.ViewStackDelegate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

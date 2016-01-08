@@ -1,4 +1,4 @@
-package me.mattlogan.library.Map;
+package com.joeracosta.library.Map;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import me.mattlogan.library.AnimatorFactory;
-import me.mattlogan.library.BackPressListener;
-import me.mattlogan.library.FirstLayoutListener;
-import me.mattlogan.library.Screen;
-import me.mattlogan.library.ViewFactory;
+import com.joeracosta.library.AnimatorFactory;
+import com.joeracosta.library.BackPressListener;
+import com.joeracosta.library.FirstLayoutListener;
+import com.joeracosta.library.Screen;
+import com.joeracosta.library.ViewFactory;
 
-import static me.mattlogan.library.Preconditions.checkNotNull;
-import static me.mattlogan.library.Preconditions.checkStringNotEmpty;
+import static com.joeracosta.library.Preconditions.checkNotNull;
+import static com.joeracosta.library.Preconditions.checkStringNotEmpty;
 
 /**
  * Created by Joe on 1/4/2016.

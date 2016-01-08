@@ -1,4 +1,4 @@
-package me.mattlogan.library.Stack;
+package com.joeracosta.library.Stack;
 
 /**
  * Listener interface for stack-changed events

@@ -1,4 +1,4 @@
-package me.mattlogan.library;
+package com.joeracosta.library;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -36,6 +36,10 @@ public abstract class ViewFactory implements Serializable {
         mDataToPass = data;
     }
 
+    public Bundle getDataToPass(){
+        return mDataToPass;
+    }
+
     public void deleteDataToPass(){
         mDataToPass = null;
     }
@@ -45,7 +49,4 @@ public abstract class ViewFactory implements Serializable {
      */
     public abstract int getLayoutResource();
 
-    public Bundle getDataToPass(){
-        return mDataToPass;
-    }
 }
