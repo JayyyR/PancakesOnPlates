@@ -8,11 +8,11 @@ import android.view.View;
 
 import com.joeracosta.mapapp.R;
 
-import me.mattlogan.library.Screen;
-import me.mattlogan.library.Stack.ViewStackHost;
+import com.joeracosta.library.Screen;
+import com.joeracosta.library.Stack.ViewStackHost;
 
-import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.Stack.ViewStack;
+import com.joeracosta.library.ViewFactory;
+import com.joeracosta.library.Stack.ViewStack;
 
 public class RedScreen extends Screen {
 

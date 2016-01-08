@@ -5,19 +5,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import com.joeracosta.mapapp.R;
 
-import me.mattlogan.library.Screen;
-import me.mattlogan.library.Stack.ViewStackHost;
+import com.joeracosta.library.Screen;
+import com.joeracosta.library.Stack.ViewStackHost;
 import com.joeracosta.mapapp.view.StackScreens.RedScreen;
 
-import me.mattlogan.library.BackPressListener;
-import me.mattlogan.library.ViewFactory;
-import me.mattlogan.library.Stack.ViewStack;
-import me.mattlogan.library.Stack.ViewStackDelegate;
+import com.joeracosta.library.BackPressListener;
+import com.joeracosta.library.ViewFactory;
+import com.joeracosta.library.Stack.ViewStack;
+import com.joeracosta.library.Stack.ViewStackDelegate;
 
 public class StackHostScreen extends Screen implements ViewStackHost,
         ViewStackDelegate, BackPressListener{

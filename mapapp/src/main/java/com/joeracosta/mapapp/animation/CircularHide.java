@@ -6,7 +6,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 
-import me.mattlogan.library.AnimatorFactory;
+import com.joeracosta.library.AnimatorFactory;
 
 public class CircularHide implements AnimatorFactory {
 

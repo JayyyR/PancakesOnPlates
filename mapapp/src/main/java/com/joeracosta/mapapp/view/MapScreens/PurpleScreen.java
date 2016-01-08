@@ -4,14 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.joeracosta.mapapp.R;
 
-import me.mattlogan.library.Screen;
-import me.mattlogan.library.ViewFactory;
+import com.joeracosta.library.Screen;
+import com.joeracosta.library.ViewFactory;
 
 public class PurpleScreen extends Screen{
 
