@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import java.io.Serializable;
 
 /**
- * Interface for deferred creation of View instances.
+ * Abstract Class for deferred creation of View instances.
  */
 public abstract class ViewFactory implements Serializable {
 

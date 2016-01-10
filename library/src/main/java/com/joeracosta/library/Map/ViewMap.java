@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.joeracosta.library.AnimatorFactory;
 import com.joeracosta.library.BackPressListener;
-import com.joeracosta.library.FirstLayoutListener;
 import com.joeracosta.library.Screen;
 import com.joeracosta.library.ViewFactory;
 
@@ -49,8 +47,8 @@ public final class ViewMap {
     }
 
     /**
-     * Saves the ViewMap state (an ordered stack of ViewFactories) to the provided Bundle using
-     * the provided tag
+     * Saves the ViewMap state (an map of ViewFactories and the currently showing view)
+     * to the provided Bundle using the provided tag
      *
      * @param bundle The Bundle in which to save the serialized Stack of ViewFactories
      * @param tag    The tag, or "bundle key," for the stored data
@@ -64,7 +62,7 @@ public final class ViewMap {
     }
 
     /**
-     * Resets the navigation stack state to what it was when saveToBundle() was called.
+     * Resets the navigation map state to what it was when saveToBundle() was called.
      *
      * @param bundle A bundle containing saved ViewMap state
      * @param tag    The tag, or key, for which the ViewMap state was saved
@@ -91,7 +89,8 @@ public final class ViewMap {
     }
 
     /**
-     * Shows a View, created by the provided ViewFactory. If the view doesn't exist yet in the map, it will add it.
+     * Shows a View, created by the provided ViewFactory. If the view doesn't exist yet in the map,
+     * it will be added. If it does exist, that instance of the view comes to the top
      *
      * @param key the id of the view, must be unique
      * @param viewFactory responsible for the creation of the next View in the navigation stack
@@ -126,41 +125,6 @@ public final class ViewMap {
             container.bringChildToFront(viewToFront);
         }
         setAppropriateVisibility();
-    }
-
-    /**
-     * Shows a View, created by the provided ViewFactory, animates
-     * it using the Animator created by the provided AnimatorFactory
-     *
-     * @param viewFactory     responsible for the creation of the next View in the navigation stack
-     * @param animatorFactory responsible for the creation of an Animator to animate the next View
-     *                        onto the navigation stack
-     * @return the provided ViewFactory (to comply with the Java Stack API)
-     */
-    public ViewFactory pushWithAnimation(int key, ViewFactory viewFactory,
-                                         final AnimatorFactory animatorFactory) {
-        checkNotNull(viewFactory, "viewFactory == null");
-        checkNotNull(animatorFactory, "animatorFactory == null");
-        View view;
-        if (!map.containsKey(key)){
-            map.put(key, viewFactory);
-            view = viewFactory.createView(container.getContext(), container);
-            container.addView(view);
-        }
-        else{
-            view = container.findViewById(key);
-            container.bringChildToFront(view);
-        }
-        notifyListeners();
-        view.getViewTreeObserver().addOnGlobalLayoutListener(new FirstLayoutListener(view) {
-            @Override
-            public void onFirstLayout(View view) {
-                // We have to wait until the View's first layout pass to start the animation,
-                // otherwise the view's width and height would be zero.
-                startAnimation(animatorFactory, view, swapAnimatorListener);
-            }
-        });
-        return viewFactory;
     }
 
     /**
@@ -215,13 +179,6 @@ public final class ViewMap {
             container.getChildAt(container.getChildCount()-1).setVisibility(View.VISIBLE);
         }
 
-    }
-
-    private void startAnimation(AnimatorFactory animatorFactory, View view,
-                                Animator.AnimatorListener listener) {
-        Animator animator = animatorFactory.createAnimator(view);
-        animator.addListener(listener);
-        animator.start();
     }
 
     private void notifyListeners() {

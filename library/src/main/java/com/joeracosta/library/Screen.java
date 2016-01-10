@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
+
+import com.joeracosta.library.Map.NoViewIDException;
 
 /**
  * Created by Joe on 1/4/2016.
@@ -13,7 +15,7 @@ import android.widget.FrameLayout;
  * on the device. It can contain one view. It can contain many custom views. The implemenation
  * of this class should contain a ViewFactory so it can be properly added to a ViewStack or ViewMap.
  */
-public abstract class Screen extends FrameLayout{
+public abstract class Screen extends ViewGroup{
 
     private static String INSTANCE_STATE = "com.joeracosta.screen.instanceState";
     private boolean mRestored;
@@ -53,7 +55,11 @@ public abstract class Screen extends FrameLayout{
         super.onAttachedToWindow();
 
         if (getId() == View.NO_ID){
-            //Todo throw exception, need ID
+            try {
+                throw new NoViewIDException("Your Screen must set a unique ID, returned in the getViewID() method");
+            } catch (NoViewIDException e) {
+                e.printStackTrace();
+            }
         }
         onScreenAttached();
     }
@@ -147,13 +153,6 @@ public abstract class Screen extends FrameLayout{
      * back into view
      */
     protected void onScreenVisible(){
-
-    }
-
-    /**
-     * Called when screen becomes invisible. This is less likely
-     */
-    protected void onScreenInvisible(){
 
     }
 
