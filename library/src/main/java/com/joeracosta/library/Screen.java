@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.joeracosta.library.Map.NoViewIDException;
 
@@ -15,7 +16,7 @@ import com.joeracosta.library.Map.NoViewIDException;
  * on the device. It can contain one view. It can contain many custom views. The implemenation
  * of this class should contain a ViewFactory so it can be properly added to a ViewStack or ViewMap.
  */
-public abstract class Screen extends ViewGroup{
+public abstract class Screen extends FrameLayout {
 
     private static String INSTANCE_STATE = "com.joeracosta.screen.instanceState";
     private boolean mRestored;
