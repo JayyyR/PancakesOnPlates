@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.joeracosta.sampleapp.view.StackScreens.GreenScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#00FF00"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/green_buttons"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/green_button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"/>
+
+            <Button
+                android:id="@+id/green_button_go_to_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Go to blue"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textlabel"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/green_buttons"
+            android:layout_marginTop="20dp"
+            android:text="Enter text here to pass to next screen:"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/green_text_entry"
+            android:layout_below="@id/textlabel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:minHeight="50dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</com.joeracosta.sampleapp.view.StackScreens.GreenScreen>
