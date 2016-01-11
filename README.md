@@ -1,7 +1,7 @@
-Pancakes
+PancakesOnPlates
 ----
 
-Pancakes is a View-based navigation stack library for Android. While it does aim to replace **some** of FragmentManager's functionality, its feature set is not one-to-one with that of FragmentManager, as Views and Fragments are inherently different. Unlike FragmentManager, it also supports the use of Animators for View transitions.
+PancakesOnPlates is a View-based navigation library for Android. It is forked from Matt Logan's Pancakes library, located [here](https://github.com/mattlogan/Pancakes). PancakesOnPlates aims to expand upon Pancakes and make it more versatile. In addition to Stack-based navigation, the library also allows for Map-based navigation.
 
 Download
 ----
@@ -13,36 +13,57 @@ compile 'me.mattlogan.pancakes:pancakes:3.1.0'
 Usage
 -----
 
-Create a `ViewStack` instance with a `ViewGroup` container and a `ViewStackDelegate`:
+Activities, Fragments, and Views can all be StackHosts or MapHosts. The advantage to using this library is you don't need Fragments, and you don't need more than Activity.
+
+In your host class, implement `ViewStackHost`, and create a `ViewStack` instance with a `ViewGroup` container and a `ViewStackDelegate`:
 
 ```java
 ViewStack viewStack = ViewStack.create(container, this);
 ```
 
-Create a `ViewFactory` for each `View`:
+Or implement `ViewMapHost`, and create a `ViewMap` instance with a `ViewGroup` container:
+
+```java
+ViewMap viewMap = ViewMap.create(container, this);
+```
+
+
+Create a `ViewFactory` for each `View` that indicates the layout of the View:
 
 ```java
 public class RedViewFactory implements ViewFactory {
-    @Override
-    public View createView(Context context, ViewGroup container) {
-        return LayoutInflater.from(context).inflate(R.layout.view_red, container, false);
-    }
+     @Override
+        public int getLayoutResource() {
+            return R.layout.red_screen;
+        }
 }
 ```
 
-Add a `View` to your container by pushing a `ViewFactory`:
+For a stack, add a `View` to your container by pushing a `ViewFactory`:
 
 ```java
 viewStack.push(new RedViewFactory());
 ```
 
-Call `pop()` to go back one `View`:
+For a map, show a `View` in your container by showing a `ViewFactory` with the unique id of the view:
 
 ```java
-viewStack.pop();
+viewMap.show(R.id.red_view, new RedViewFactory());
 ```
 
-Or, use an `AnimatorFactory` along with `pushWithAnimation(ViewFactory, AnimatorFactory)` and `popWithAnimation(AnimatorFactory)` to add remove a `View` with a transition animation.
+In your `onBackPressed()` method, call 
+
+```java
+viewStack.onBackPressed()
+```
+or
+```java
+viewMap.onBackPressed()
+```
+
+These methods will return true if the back press was handled, false if not. These methods will also call the `onBackPressed()` method of any View in the map or stack that implements `BackPressListener`. If there are none, the `ViewStack` will pop the top most view.
+
+For a `ViewStack`, you can also use an `AnimatorFactory` along with `pushWithAnimation(ViewFactory, AnimatorFactory)` and `popWithAnimation(AnimatorFactory)` to add remove a `View` with a transition animation.
 
 ```java
 public class CircularReveal implements AnimatorFactory {
@@ -60,20 +81,30 @@ public class CircularReveal implements AnimatorFactory {
 
 You can also call `peek()` and `peekView()` to get the `ViewFactory` and `View` at the top of the navigation stack.
 
-Add a `StackChangedListener` (or several!) if you want to be notified of changes in the navigation stack:
+If you want to be notified of changes in the stack or map, add a `StackChangedListener` or `ViewMapSwappedListener`:
 
 ```java
 viewStack.addStackChangedListener(listener);
 ```
+```java
+viewMap.addViewMapSwappedListener(listener);
+```
 
-You can also remove individual listeners with `removeStackChangedListener(StackChangedListener)` or remove all of them with `clearStackChangedListeners()`.
+You can also remove individual listeners with `removeStackChangedListener(StackChangedListener)` / `removeViewMapSwappedListener(ViewMapSwappedListener)` or remove all of them with `clearStackChangedListeners()` / `clearViewMapSwappedListeners`.
 
 Persist `ViewFactory` instances, in order, across configuration changes:
 
 ```java
 @Override
 public void onSaveInstanceState(Bundle outState) {
-    viewStack.saveToBundle(outState, STACK_TAG);
+    viewStack.saveToBundle(outState, TAG);
+    super.onSaveInstanceState(outState);
+}
+```
+```java
+@Override
+public void onSaveInstanceState(Bundle outState) {
+    viewMap.saveToBundle(outState, TAG);
     super.onSaveInstanceState(outState);
 }
 ```
@@ -81,13 +112,16 @@ public void onSaveInstanceState(Bundle outState) {
 Rebuild the stack from a `Bundle`:
 ```java
 if (savedInstanceState != null) {
-    viewStack.rebuildFromBundle(savedInstanceState, STACK_TAG);
+    viewStack.rebuildFromBundle(savedInstanceState, TAG);
+}
+```
+```java
+if (savedInstanceState != null) {
+    viewMap.rebuildFromBundle(savedInstanceState, TAG);
 }
 ```
 
-Additionally, you may use `View.onSaveInstanceState(Bundle)` and `View.onRestoreInstanceState(Bundle)` to save the state of any `View` in the navigation stack so long as it has an ID.
-
-Finally, implement `ViewStackDelegate.finishStack()` to take appropriate action when the stack is finished:
+Finally, implement `ViewStackDelegate.finishStack()` to take appropriate action when the last view is manually popped. i.e. a call to `viewStack.pop()` with one view left. `finishStack()` will not be called on a back press with one view left in the stack:
 ```java
 @Override
 public void finishStack() {
@@ -95,16 +129,75 @@ public void finishStack() {
 }
 ```
 
-See the [sample app](https://github.com/mattlogan/Pancakes/tree/master/app) for an example implementation.
+See the [sample app](https://github.com/JayyyR/PancakesOnPlates/tree/master/sampleapp) for an example implementation.
 
 **Be careful: because `ViewFactory` instances are persisted across configuration changes,
 you should not keep references in a `ViewFactory` to any objects that should be garbage collected
 on a configuration change. Keep each `ViewFactory` as simple as possible.**
 
-Tests
+Screens
 ----
 
-Unit tests located in [/library/src/test/](https://github.com/mattlogan/Pancakes/blob/master/library/src/test/java/me/mattlogan/library/ViewStackTest.java)
+The `Screen` class is an abstract class that adds convenience methods to a ViewGroup. A `Screen` should be thought of as one Screen on the device. It can contain one view, or it can contain many custom views. The implementation of this class should contain a ViewFactory so it can be properly added to a ViewStack or ViewMap.
+
+A `Screen` can also be thought of as a Fragment replacement. It has much of the same functionality you're used to but without all the overhead. Here are some of the methods it provides:
+
+```java
+    /**
+     * Called when a screen is attached to the window.
+     */
+    protected void onScreenAttached()
+
+    /**
+     * Called when a Screen is detached from the window. This won't necessarily be called
+     * just because a Screen is no longer visible to the user.
+     */
+    protected void onScreenDetached()
+    
+      /**
+     * Called when screen is destroyed and is saving state
+     * @param bundle the bundle to return. Add what you want to this before returning it back.
+     * @return
+     */
+    protected Bundle onSaveState(Bundle bundle)
+
+    /**
+     * Called when screen is restored with data
+     * @param bundle The bundle with saved stuff. Grab your stuff from this bundle.
+     */
+    protected void onRestoreState(Bundle bundle)
+    
+     /**
+     * Called when screen becomes visible on screen. The screen might have been created or brought
+     * back into view
+     */
+    protected void onScreenVisible()
+
+    /**
+     * Called when screen is gone from view or detached. The screen still might exist and be attached, but
+     * it is not visible
+     */
+    protected void onScreenGone()
+```
+
+You can easily add Screens to your ViewMap or ViewStack. Just extend `Screen` and you'll be good to go. You can even pass data between Screens easily. Just create a bundle and call `passData()` on your ViewFactory:
+
+```java
+BlueScreen.Factory blueFactory = new BlueScreen.Factory();
+Bundle data = new Bundle();
+data.putString(TEXT_KEY, stringToPass);
+blueFactory.passData(data);
+viewStack.push(blueFactory);
+```
+
+Then in the Screen your pushing to call `getPassedData()` to get the bundle you passed:
+
+```java
+Bundle data = getPassedData();
+if (data != null){
+    String text = data.getString(TEXT_KEY);
+}
+```
 
 License
 -----
