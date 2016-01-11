@@ -3,13 +3,6 @@ PancakesOnPlates
 
 PancakesOnPlates is a View-based navigation library for Android. It is forked from Matt Logan's Pancakes library, located [here](https://github.com/mattlogan/Pancakes). PancakesOnPlates aims to expand upon Pancakes and make it more versatile. In addition to Stack-based navigation, the library also allows for Map-based navigation.
 
-Download
-----
-
-```java
-compile 'me.mattlogan.pancakes:pancakes:3.1.0'
-```
-
 Usage
 -----
 
