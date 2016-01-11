@@ -15,13 +15,13 @@ Usage
 
 Activities, Fragments, and Views can all be StackHosts or MapHosts. The advantage to using this library is you don't need Fragments, and you don't need more than Activity.
 
-In your host class, create a `ViewStack` instance with a `ViewGroup` container and a `ViewStackDelegate`:
+In your host class, implement `ViewStackHost`, and create a `ViewStack` instance with a `ViewGroup` container and a `ViewStackDelegate`:
 
 ```java
 ViewStack viewStack = ViewStack.create(container, this);
 ```
 
-Or create a `ViewMap` instance with a `ViewGroup` container:
+Or implement `ViewMapHost`, and create a `ViewMap` instance with a `ViewGroup` container:
 
 ```java
 ViewMap viewMap = ViewMap.create(container, this);
@@ -90,7 +90,7 @@ viewStack.addStackChangedListener(listener);
 viewMap.addViewMapSwappedListener(listener);
 ```
 
-You can also remove individual listeners with `removeStackChangedListener(StackChangedListener)` / `removeViewMapSwappedListener` or remove all of them with `clearStackChangedListeners()` / `clearViewMapSwappedListeners`.
+You can also remove individual listeners with `removeStackChangedListener(StackChangedListener)` / `removeViewMapSwappedListener(ViewMapSwappedListener)` or remove all of them with `clearStackChangedListeners()` / `clearViewMapSwappedListeners`.
 
 Persist `ViewFactory` instances, in order, across configuration changes:
 
@@ -101,6 +101,13 @@ public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
 }
 ```
+```java
+@Override
+public void onSaveInstanceState(Bundle outState) {
+    viewMap.saveToBundle(outState, TAG);
+    super.onSaveInstanceState(outState);
+}
+```
 
 Rebuild the stack from a `Bundle`:
 ```java
@@ -108,8 +115,13 @@ if (savedInstanceState != null) {
     viewStack.rebuildFromBundle(savedInstanceState, TAG);
 }
 ```
+```java
+if (savedInstanceState != null) {
+    viewMap.rebuildFromBundle(savedInstanceState, TAG);
+}
+```
 
-Finally, implement `ViewStackDelegate.finishStack()` to take appropriate action when the last view is manually popped. i.e a call to `viewStack.pop()` with one view left. `finishStack()` will not be called on a back press with one view left in the stack:
+Finally, implement `ViewStackDelegate.finishStack()` to take appropriate action when the last view is manually popped. i.e. a call to `viewStack.pop()` with one view left. `finishStack()` will not be called on a back press with one view left in the stack:
 ```java
 @Override
 public void finishStack() {
@@ -126,9 +138,9 @@ on a configuration change. Keep each `ViewFactory` as simple as possible.**
 Screens
 ----
 
-The `Screen` class is an abstract class that adds convenience methods to a ViewGroup. A `Screen` should be thought of as one Screen on the device. It can contain one view. It can contain many custom views. The implementation of this class should contain a ViewFactory so it can be properly added to a ViewStack or ViewMap.
+The `Screen` class is an abstract class that adds convenience methods to a ViewGroup. A `Screen` should be thought of as one Screen on the device. It can contain one view, or it can contain many custom views. The implementation of this class should contain a ViewFactory so it can be properly added to a ViewStack or ViewMap.
 
-A `Screen` can also be thought of as a Fragment replacement. It as many of the functionality you're used to but without all the overhead. Here are some of the methods it provides:
+A `Screen` can also be thought of as a Fragment replacement. It has much of the same functionality you're used to but without all the overhead. Here are some of the methods it provides:
 
 ```java
     /**
