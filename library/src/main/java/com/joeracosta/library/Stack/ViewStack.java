@@ -3,6 +3,7 @@ package com.joeracosta.library.Stack;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -72,7 +73,15 @@ public final class ViewStack {
     public void rebuildFromBundle(Bundle bundle, String tag) {
         checkNotNull(bundle, "bundle == null");
         checkStringNotEmpty(tag, "tag is empty");
-        Stack<ViewFactory> savedStack = (Stack<ViewFactory>) bundle.getSerializable(tag);
+        Stack<ViewFactory> savedStack = null;
+        try {
+            savedStack = (Stack<ViewFactory>) bundle.getSerializable(tag);
+        } catch(Exception e){
+            for (String key: bundle.keySet())
+            {
+                Log.d ("stack error", key + " is a key in the bundle");
+            }
+        }
         checkNotNull(savedStack, "Bundle doesn't contain any ViewStack state.");
         for (ViewFactory viewFactory : savedStack) {
             checkNotNull(viewFactory, "viewFactory == null");

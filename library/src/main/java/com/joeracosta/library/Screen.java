@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.joeracosta.library.Map.NoViewIDException;
@@ -13,7 +12,7 @@ import com.joeracosta.library.Map.NoViewIDException;
 /**
  * Created by Joe on 1/4/2016.
  * Abstract Class that adds convenience methods to a View. A Screen should be though of as one Screen
- * on the device. It can contain one view. It can contain many custom views. The implemenation
+ * on the device. It can contain one view. It can contain many custom views. The implementation
  * of this class should contain a ViewFactory so it can be properly added to a ViewStack or ViewMap.
  */
 public abstract class Screen extends FrameLayout {
@@ -163,7 +162,6 @@ public abstract class Screen extends FrameLayout {
      */
     protected void onScreenGone(){
         mPassedData = null;
-
     }
 
 }
