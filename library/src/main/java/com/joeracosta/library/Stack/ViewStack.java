@@ -60,7 +60,13 @@ public final class ViewStack {
     public void saveToBundle(Bundle bundle, String tag) {
         checkNotNull(bundle, "bundle == null");
         checkStringNotEmpty(tag, "tag is empty");
-        bundle.putSerializable(tag, stack);
+
+        //create arraylist to seralize
+        ArrayList<ViewFactory> serializableArray = new ArrayList<>();
+        for (ViewFactory vf : stack){
+            serializableArray.add(vf);
+        }
+        bundle.putSerializable(tag, serializableArray);
     }
 
     /**
@@ -73,17 +79,9 @@ public final class ViewStack {
     public void rebuildFromBundle(Bundle bundle, String tag) {
         checkNotNull(bundle, "bundle == null");
         checkStringNotEmpty(tag, "tag is empty");
-        Stack<ViewFactory> savedStack = null;
-        try {
-            savedStack = (Stack<ViewFactory>) bundle.getSerializable(tag);
-        } catch(Exception e){
-            for (String key: bundle.keySet())
-            {
-                Log.d ("stack error", key + " is a key in the bundle");
-            }
-        }
-        checkNotNull(savedStack, "Bundle doesn't contain any ViewStack state.");
-        for (ViewFactory viewFactory : savedStack) {
+        ArrayList<ViewFactory> serializedArray = (ArrayList<ViewFactory>) bundle.getSerializable(tag);
+        checkNotNull(serializedArray, "Bundle doesn't contain any ViewStack state.");
+        for (ViewFactory viewFactory : serializedArray) {
             checkNotNull(viewFactory, "viewFactory == null");
             pushWithoutNotifyingListeners(viewFactory);
         }
