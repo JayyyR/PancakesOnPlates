@@ -39,7 +39,7 @@ ViewMap viewMap = ViewMap.create(container, this);
 ```
 
 
-Create a `ViewFactory` for each `View` that indicates the layout of the View:
+Create a `ViewFactory` for each `View` that you want in your stack or map. The ViewFactory should indicate the layout of the View:
 
 ```java
 public class RedViewFactory implements ViewFactory {
