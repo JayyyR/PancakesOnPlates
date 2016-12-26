@@ -17,7 +17,7 @@ allprojects {
 Add the dependency:
 ```java
 dependencies {
-	        compile 'com.github.JayyyR:PancakesOnPlates:v0.2-beta'
+	        compile 'com.github.JayyyR:PancakesOnPlates:v0.3-beta'
 	}
 ```
 
